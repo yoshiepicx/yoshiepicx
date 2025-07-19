@@ -1,0 +1,132 @@
+hola subire un proyecto 3 
+class Vehiculo:
+    """
+    Clase base que representa un vehículo genérico.
+    
+    Atributos:
+        marca (str): Marca del vehículo
+        modelo (str): Modelo del vehículo
+        anio (int): Año de fabricación
+    """
+    
+    def __init__(self, marca: str, modelo: str, anio: int):
+        """
+        Constructor de la clase base Vehiculo.
+        
+        Args:
+            marca: Marca del vehículo
+            modelo: Modelo del vehículo
+            anio: Año de fabricación
+        """
+        self.marca = marca
+        self.modelo = modelo
+        self.anio = anio
+    
+    def obtener_info(self) -> str:
+        """
+        Devuelve información básica del vehículo
+        
+        Returns:
+            str: Información formateada del vehículo
+        """
+        return f"{self.marca} {self.modelo} ({self.anio})"
+    
+    def arrancar(self) -> str:
+        """Simula el arranque del vehículo"""
+        return "Vehículo arrancado"
+
+
+class Automovil(Vehiculo):
+    """
+    Clase derivada que representa un automóvil.
+    Hereda de: Vehiculo
+    
+    Atributos adicionales:
+        num_puertas (int): Número de puertas
+        tipo_combustible (str): Tipo de combustible
+    """
+    
+    def __init__(self, marca: str, modelo: str, anio: int, num_puertas: int, tipo_combustible: str):
+        """
+        Constructor de Automovil.
+        
+        Args:
+            num_puertas: Número de puertas del automóvil
+            tipo_combustible: Tipo de combustible (ej. Gasolina, Diésel)
+        """
+        super().__init__(marca, modelo, anio)
+        self.num_puertas = num_puertas
+        self.tipo_combustible = tipo_combustible
+    
+    def obtener_info(self) -> str:
+        """
+        Sobrescribe el método obtener_info para incluir información específica de automóviles
+        
+        Returns:
+            str: Información completa del automóvil
+        """
+        info_base = super().obtener_info()
+        return f"{info_base} - {self.num_puertas} puertas, Combustible: {self.tipo_combustible}"
+    
+    def abrir_maletero(self) -> str:
+        """Método exclusivo de Automovil"""
+        return "Maletero abierto"
+
+
+class Motocicleta(Vehiculo):
+    """
+    Clase derivada que representa una motocicleta.
+    Hereda de: Vehiculo
+    
+    Atributos adicionales:
+        tipo (str): Tipo de motocicleta (ej. Deportiva, Cruiser)
+        cilindrada (int): Cilindrada en cc
+    """
+    
+    def __init__(self, marca: str, modelo: str, anio: int, tipo: str, cilindrada: int):
+        """
+        Constructor de Motocicleta.
+        
+        Args:
+            tipo: Tipo de motocicleta
+            cilindrada: Cilindrada en centímetros cúbicos
+        """
+        super().__init__(marca, modelo, anio)
+        self.tipo = tipo
+        self.cilindrada = cilindrada
+    
+    def obtener_info(self) -> str:
+        """
+        Sobrescribe el método obtener_info para incluir información específica de motocicletas
+        
+        Returns:
+            str: Información completa de la motocicleta
+        """
+        info_base = super().obtener_info()
+        return f"{info_base} - Tipo: {self.tipo}, Cilindrada: {self.cilindrada}cc"
+    
+    def hacer_caballito(self) -> str:
+        """Método exclusivo de Motocicleta"""
+        return "¡Realizando caballito!"
+
+
+# Programa principal para demostrar la herencia
+if __name__ == "__main__":
+    # Crear instancias de las clases derivadas
+    auto = Automovil("Toyota", "Corolla", 2022, 4, "Gasolina")
+    moto = Motocicleta("Harley-Davidson", "Sportster", 2023, "Cruiser", 1200)
+    
+    # Probar métodos heredados y sobrescritos
+    print("\n=== Información de vehículos ===")
+    print("Automóvil:", auto.obtener_info())
+    print("Motocicleta:", moto.obtener_info())
+    
+    # Probar método de clase base
+    print("\n=== Arranque ===")
+    print(auto.arrancar())
+    print(moto.arrancar())
+    
+    # Probar métodos exclusivos
+    print("\n=== Métodos exclusivos ===")
+    print("Automóvil:", auto.abrir_maletero())
+    print("Motocicleta:", moto.hacer_caballito())
